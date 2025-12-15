@@ -1,0 +1,90 @@
+.speed-dial-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+}
+
+.speed-dial-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.speed-dial-menu.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.speed-dial-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: #2c5aa0;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(44, 90, 160, 0.3);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.speed-dial-btn:hover {
+  background: #1e3f73;
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(44, 90, 160, 0.4);
+}
+
+.main-dial-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: #2c5aa0;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(44, 90, 160, 0.4);
+  transition: all 0.3s ease;
+}
+
+.main-dial-btn:hover {
+  background: #1e3f73;
+  transform: scale(1.05);
+}
+
+.main-dial-btn.active {
+  transform: rotate(45deg);
+}
+
+.main-dial-btn.active:hover {
+  transform: rotate(45deg) scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .speed-dial-container {
+    bottom: 1.5rem;
+    right: 1.5rem;
+  }
+  
+  .speed-dial-btn {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .main-dial-btn {
+    width: 52px;
+    height: 52px;
+  }
+}
