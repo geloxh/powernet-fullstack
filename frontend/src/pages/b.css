@@ -35,8 +35,6 @@ img {
     height: auto;
 }
 
-@import url('../floating-button.css');
-
 /* Gradient text utility */
 .gradient-text {
     background: linear-gradient(135deg, #ffd700 0%, #ff6b35 50%, #f7931e 100%);
