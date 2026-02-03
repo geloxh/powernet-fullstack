@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from './LanguageSwitcher';
 
 import './Header.css';
 
@@ -43,7 +44,7 @@ const Header = () => {
                         </li>
                     ))}
                 </ul>
-                
+                <LanguageSwitcher />
             </nav>
             <div 
                 className='nav-toggle'
