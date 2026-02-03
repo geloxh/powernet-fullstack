@@ -1,17 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
 import './Header.css';
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const location = useLocation();
+    const { t } = useTranslation();
 
     const navItems = [
-        { path: '/', label: 'Home', page: 'home' },
-        { path: '/about', label: 'About Us', page: 'about' },
-        { path: '/solutions', label: 'Solutions', page: 'solutions' },
-        { path: '/contact', label: 'Contact Us', page: 'contact' },
-        { path: '/projects', label: 'Use Cases', page: 'projects' }
+        { path: '/', label: t('nav.home'), page: 'home' },
+        { path: '/about', label: t('nav.about'), page: 'about' },
+        { path: '/solutions', label: t('nav.solutions'), page: 'solutions' },
+        { path: '/contact', label: t('nav.contact'), page: 'contact' },
+        { path: '/projects', label: t('nav.projects'), page: 'projects' }
     ];
 
     return (
@@ -23,7 +26,7 @@ const Header = () => {
                         alt="PowerNet Edge Solutions"
                         onError={(e) => e.target.style.display = 'none'}
                     />
-                    <h1>PowerNet</h1>
+                    <h1>{t('common.powernet')}</h1>
                 </Link>
             </div>
             <nav className={`main-nav ${isMenuOpen ? 'active' : ''}`}>
@@ -40,13 +43,14 @@ const Header = () => {
                         </li>
                     ))}
                 </ul>
+                
             </nav>
             <div 
                 className='nav-toggle'
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 role="button"
                 aria-label='Toggle navigation menu'
-                aria-expanded={'isMenuOpen'}>
+                aria-expanded={isMenuOpen}>
                 <div className='mobile-nav'>
                     <span></span>
                     <span></span>

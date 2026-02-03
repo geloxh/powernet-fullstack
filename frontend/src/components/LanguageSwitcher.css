@@ -1,0 +1,11 @@
+.language-switcher {
+    margin-left: 1rem;
+}
+
+language-select {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+}

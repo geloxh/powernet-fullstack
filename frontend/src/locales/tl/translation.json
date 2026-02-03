@@ -1,0 +1,14 @@
+{
+    "nav": {
+        "home": "Tahanan",
+        "about": "Tungkol Sa Amin",
+        "solutions": "Mga Solusyon",
+        "contact": "Makipag-ugnayan",
+        "projects": "Mga Kaso ng Paggamit"
+    },
+    "common": {
+        "powernet": "PowerNet",
+        "loading ": "Naglo-load...",
+        "error": "Nagkaroon ng problema"
+    }
+}

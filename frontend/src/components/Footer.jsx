@@ -1,7 +1,9 @@
+import { useTranslation } from 'react-i18next';
 import './Footer.css';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { t } = useTranslation();
 
   return (
     <footer className="footer">
@@ -25,9 +27,9 @@ const Footer = () => {
             <div className="footer-section">
               <h3>Company</h3>
               <ul>
-                <li><a href="/about">About Us</a></li>
-                <li><a href="/projects">Projects</a></li>
-                <li><a href="/contact">Contact</a></li>
+                <li><a href="/about">{t('nav.about')}</a></li>
+                <li><a href="/projects">{t('nav.projects')}</a></li>
+                <li><a href="/contact">{t('nav.contact')}</a></li>
               </ul>
             </div>
             <div className="footer-section">

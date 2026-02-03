@@ -1,0 +1,14 @@
+{
+    "nav": {
+        "home": "Home",
+        "about": "About Us",
+        "solutions": "Solutions",
+        "contact": "Contact us",
+        "projects": "Use Cases"
+    },
+    "common": {
+        "powernet": "PowerNet",
+        "loading": "Loading...",
+        "error": "Error occurred"
+    }
+}

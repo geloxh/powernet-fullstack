@@ -1,0 +1,14 @@
+{
+    "nav": {
+        "home": "Trang Chủ",
+        "about": "Về Chúng Tôi",
+        "solutions": "Giải Pháp",
+        "contact": "Liên Hệ",
+        "projects": "Trường Hợp Sử Dụng"
+    },
+    "common": {
+        "powernet": "PowerNet",
+        "loading": "Đang tải...",
+        "error": "Đã xảy ra lỗi"
+    }
+}
