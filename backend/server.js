@@ -46,22 +46,32 @@ app.post('/api/register', async (req, res) => {
     }
 });
 
-app.post('./api/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
     try {
-        const ( email, password ) = req.body;
+        const { email, password } = req.body;
+
+        const user = await User.findOne({ email });
+        if (!user || !(await user.comparePassword(password))) {
+            return res.status(401).json({ message: 'Invalid credentials' });
+        }
+
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '7d'});
+        res.json({ token, user: { id: user._id, name: user.name, email: user.email } });
+    } catch (error) {
+        res.status(500).json({ message: 'Login failed:', error: error.message });
     }
-})
+});
 
 // API Routes
 app.get('/api/test', (req, res) => {
-    res.json({message: "PowerNet Backend is running!"});
+    res.json({ message: "PowerNet Backend is running!" });
 });
 
 // Contact form endpoint
 app.post('/api/contact', (req, res) => {
     const { name, email, message } = req.body;
     // Add your contact form logic here
-    res.json({success: true, message: "Message received"});
+    res.json({ success: true, message: "Message received" });
 });
 
 // Serve React app
