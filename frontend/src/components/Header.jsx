@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { AuthContext } from '../context/AuthContext';
 import LanguageSwitcher from './LanguageSwitcher';
 
 import './Header.css';
@@ -9,6 +10,7 @@ const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const location = useLocation();
     const { t } = useTranslation();
+    const { user, logout } = useContext(AuthContext);
 
     const navItems = [
         { path: '/', label: t('nav.home'), page: 'home' },
@@ -43,6 +45,17 @@ const Header = () => {
                             </Link>
                         </li>
                     ))}
+                    {user ? (
+                        <>
+                            <li><span className="user-name">Hi, {user.name}</span></li>
+                            <li><button onClick={logout} className="auth-btn">Logout</button></li>
+                        </>
+                    ) : (
+                        <>
+                            <li><Link to="/login" onClick={() => setIsMenuOpen(false)}>Login</Link></li>
+                            <li><Link to="/register" onClick={() => setIsMenuOpen(false)}>Register</Link></li>
+                        </>
+                    )}
                 </ul>
                 <LanguageSwitcher />
             </nav>
