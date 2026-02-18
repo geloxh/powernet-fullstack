@@ -62,7 +62,7 @@ function Register() {
                         minLength="6"
                     />
                     <button type="submit">Register</button>
-                    <p>Already have an account? <link to="/login">Login</link></p>
+                    <p>Already have an account? <Link to="/login">Login</Link></p>
                 </form>
             </div>
         </div>

@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { AuthContext } from '../context/AuthContext';
 import LanguageSwitcher from './LanguageSwitcher';
@@ -8,70 +8,88 @@ import './Header.css';
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
     const location = useLocation();
+    const navigate = useNavigate();
     const { t } = useTranslation();
     const { user, logout } = useContext(AuthContext);
 
-    const navItems = [
-        { path: '/', label: t('nav.home'), page: 'home' },
-        { path: '/about', label: t('nav.about'), page: 'about' },
-        { path: '/solutions', label: t('nav.solutions'), page: 'solutions' },
-        { path: '/contact', label: t('nav.contact'), page: 'contact' },
-        { path: '/projects', label: t('nav.projects'), page: 'projects' }
-    ];
+    const handleSearch = (e) => {
+        e.preventDefault();
+        if (searchQuery.trim()) {
+            navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+            setSearchQuery('');
+        }
+    };
+
+    const isActive = (path) => location.pathname === path;
 
     return (
-        <header className='main-header'>
-            <div className='logo'>
-                <Link to="/">
-                    <img
-                        src="/images/logo.png" 
-                        alt="PowerNet Edge Solutions"
-                        onError={(e) => e.target.style.display = 'none'}
-                    />
-                    <h1>{t('common.powernet')}</h1>
-                </Link>
-            </div>
-            <nav className={`main-nav ${isMenuOpen ? 'active' : ''}`}>
-                <ul>
-                    {navItems.map(item => (
-                        <li key={item.page}>
-                            <Link 
-                                to={item.path}
-                                className={location.pathname === item.path ? 'active' : ''}
-                                onClick={() => setIsMenuOpen(false)}
-                            >
-                                {item.label}
-                            </Link>
-                        </li>
-                    ))}
+        <>
+            {/* Top Bar */}
+            <div className="top-bar">
+                <div className="top-right">
+                    <Link to="/partners">{t('header.partners', 'Partners')}</Link>
+                    <Link to="/contact">{t('header.contact', 'Contact')}</Link>
+                    <LanguageSwitcher />
                     {user ? (
-                        <>
-                            <li><span className="user-name">Hi, {user.name}</span></li>
-                            <li><button onClick={logout} className="auth-btn">Logout</button></li>
-                        </>
+                        <button onClick={logout} className="top-link" aria-label={t('header.logout', 'Log out')}>
+                            {t('header.logout', 'Log out')}
+                        </button>
                     ) : (
-                        <>
-                            <li><Link to="/login" onClick={() => setIsMenuOpen(false)}>Login</Link></li>
-                            <li><Link to="/register" onClick={() => setIsMenuOpen(false)}>Register</Link></li>
-                        </>
+                        <Link to="/login">{t('header.login', 'Log in')}</Link>
                     )}
-                </ul>
-                <LanguageSwitcher />
-            </nav>
-            <div 
-                className='nav-toggle'
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                role="button"
-                aria-label='Toggle navigation menu'
-                aria-expanded={isMenuOpen}>
-                <div className='mobile-nav'>
-                    <span></span>
-                    <span></span>
-                    <span></span>
                 </div>
             </div>
-        </header>
+
+            {/* Main Header */}
+            <header className="main-header">
+                <div className="logo">
+                    <Link to="/" aria-label={t('header.home', 'Home')}>
+                        <img src="/images/logo.png" alt="PowerNet Edge Solutions" />
+                    </Link>
+                </div>
+
+                <button className="menu-toggle"
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    aria-label={t('header-toggleMenu', 'Toggle Menu')}
+                    aria-expanded={isMenuOpen}
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <nav className={`nav-links ${isMenuOpen ? 'open' : ''}`} aria-label={t('header.mainNav', 'Main navigation')}>
+                    <Link to="/careers" className={isActive('/careers') ? 'active' : ''}>
+                        {t('header.careers', 'Careers')}
+                    </Link>
+                    <Link to="/solutions" className={isActive('/solutions') ? 'active' : ''}>
+                        {t('headerf.solutions', 'Solutions')}
+                    </Link>
+                    <Link to="/partners" className={isActive('/partners') ? 'active' : ''}>
+                        {t('header.partners', 'Partners')}
+                    </Link>
+                    <Link to="/news" className={isActive('/news') ? 'active' : ''}>
+                        {t('header.news', 'News')}
+                    </Link>
+                </nav>
+                <div className={`right-section ${isMenuOpen ? 'open' : ''}`}>
+                    <Link to="/about" className={isActive('/about') ? 'active' : ''}>
+                        {t('header.about', 'About Us')} 
+                    </Link>
+                    <form onSubmit={handleSearch} role="search">
+                        <input
+                            type="search"
+                            placeholder={t('header.search', 'Search')}
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            aria-label={t('header.searchLabel', 'Search site')}
+                        />
+                    </form>
+                </div>
+            </header>
+        </>
     );
 };
 

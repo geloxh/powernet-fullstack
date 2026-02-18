@@ -3,6 +3,7 @@ const path = require('path');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
+const News = require('./models/News');
 
 require('dotenv').config();
 
@@ -83,6 +84,26 @@ app.use((req, res) => {
 
 app.listen(PORT, () => {
     console.log(`PowerNet server running on port ${PORT}`);
+});
+
+// News Routes
+app.get('/api/news', async (req, res) => {
+    try {
+        const news = (await News.find()).toSorted({ publishedAT: -1 });
+        res.json(news);
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to fetch news', error: error.message });
+    }
+});
+
+app.get('/api/news/:id', async (req, res) => {
+    try {
+        const news = await News.findById(req.params.id);
+        if (!news) return res.status(404).json({ message: 'News not found' });
+        res.json(news);
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to fetch news', error: error.message });
+    }
 });
 
 // Export the app for Vercel

@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { authContext } from '../context/AuthContext';
+import { AuthContext } from '../context/AuthContext';
 import './auth.css';
 
 function Login() {
@@ -50,7 +50,7 @@ function Login() {
                         placeholder = "Password"
                         value = { password }
                         onChange = {(e) => setPassword(e.target.value)}
-                        reuired 
+                        required 
                     />
                     <button type="submit">Login</button>
                 </form>
