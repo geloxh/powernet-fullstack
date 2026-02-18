@@ -14,21 +14,23 @@ import Register from './pages/Register';
 
 function App() {
   return (
-    <Router>
-      <Header />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/solutions' element={<Solutions />} />
-        <Route path='/contact' element={<Contact />} />
-        <Route path='/projects' element={<Projects />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-      </Routes>
-      <Footer />
-      <FloatingButton />
-      <CookieBanner />
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Header />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/solutions' element={<Solutions />} />
+          <Route path='/contact' element={<Contact />} />
+          <Route path='/projects' element={<Projects />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+        </Routes>
+        <Footer />
+        <FloatingButton />
+        <CookieBanner />
+      </Router>
+    </AuthProvider>
   );
 }
 
