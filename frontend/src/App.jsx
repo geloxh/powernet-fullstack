@@ -11,6 +11,7 @@ import Contact from './pages/Contact';
 import Projects from './pages/Projects';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import News from './pages/News';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path='/solutions' element={<Solutions />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/projects' element={<Projects />} />
+          <Route path='/news' element={<News />}></Route>
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
         </Routes>
