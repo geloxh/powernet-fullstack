@@ -13,6 +13,7 @@ import Partners from './pages/Partners';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import News from './pages/News';
+import Careers from './pages/Careers';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/about' element={<About />} />
+          <Route path='/careers' element={<Careers />} />
           <Route path='/solutions' element={<Solutions />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/projects' element={<Projects />} />
