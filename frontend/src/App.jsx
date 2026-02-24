@@ -9,6 +9,7 @@ import About from './pages/About';
 import Solutions from './pages/Solutions';
 import Contact from './pages/Contact';
 import Projects from './pages/Projects';
+import Partners from './pages/Partners';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import News from './pages/News';
@@ -24,6 +25,7 @@ function App() {
           <Route path='/solutions' element={<Solutions />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/projects' element={<Projects />} />
+          <Route path='/partners' element={<Partners />} />
           <Route path='/news' element={<News />}></Route>
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
