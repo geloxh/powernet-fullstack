@@ -1,24 +1,25 @@
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './Partners.css';
 
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+
 const Partners = () => {
+  const [partners, setPartners] = useState([]);
+
   useEffect(() => {
-    if (window.AOS) {
-      window.AOS.init();
-    }
+    if (window.AOS) window.AOS.init();
+    fetchPartners();
   }, []);
 
-  const partners = [
-    { name: 'RUJIE', category: 'Network', desc: 'Leading network infrastructure solutions provider', img: 'ruijie.png', specialties: ['WiFi Solutions', 'SD-WAN', 'Switching'], url: 'https://www.ruijienetworks.com/' },
-    { name: 'ZTE', category: 'ICT', desc: 'Global leader in integrated ICT solutions', img: 'zte.png', specialties: ['GPON', 'Data Centers', 'Cloud'], url: 'https://www.zte.com.cn/global/' },
-    { name: 'SANGFOR', category: 'Security', desc: 'Advanced cybersecurity and cloud infrastructure', img: 'sangfor.png', specialties: ['Firewall', 'HCI'], url: 'https://www.sangfor.com/' },
-    { name: 'LIVECOM', category: 'BSS', desc: 'Business support systems and solutions', img: 'livecom.png', specialties: ['BSS Platform'], url: 'http://www.livecom-axd.com/en/' },
-    { name: 'DAHUA', category: 'Security', desc: 'Comprehensive security and surveillance solutions', img: 'dahua.png', specialties: ['IP Cameras', 'NVR', 'Access Control'], url: 'https://www.dahuasecurity.com/ph' },
-    { name: 'SKYWORTH', category: 'Connectivity', desc: 'Smart connectivity and digital solutions', img: 'skyworth.png', specialties: ['ONT', 'Set-top Box'], url: 'https://en.skyworthdigital.com/' },
-    { name: 'HENGTONG', category: 'Infrastructure', desc: 'Optical and power transmission solutions', img: 'hengtong.png', specialties: ['Fiber Optics', 'Power Cables'], url: 'https://www.hengtonggroup.com/en/' },
-    { name: 'YEASTAR', category: 'Communications', desc: 'Unified communications and telephony systems', img: 'yeastar.png', specialties: ['IP-PBX', 'VoIP', 'UC'], url: 'https://www.yeastar.com/' },
-    { name: 'SHOTO', category: 'Energy', desc: 'Sustainable energy storage solutions', img: 'shoto.png', specialties: ['Green Energy', 'Battery Systems'], url: 'https://www.shuangdeng.com.cn/list-71.html' }
-  ];
+  const fetchPartners = async () => {
+    try {
+      const res = await fetch(`${API_URL}/api/partners`);
+      const data = await res.json();
+      setPartners(data);
+    } catch (error) {
+      console.error('Error fetching partners:', error);
+    }
+  };
 
   return (
     <div className="partners-page">
@@ -39,7 +40,7 @@ const Partners = () => {
         <div className="partners-container">
           <div className="partners-grid">
             {partners.map((partner, index) => (
-              <div key={index} className="partner-card" data-aos="zoom-in" data-aos-delay={100 + index * 50}>
+              <div key={partner._id} className="partner-card" data-aos="zoom-in" data-aos-delay={100 + index * 50}>
                 <div className="partner-card-inner">
                   <div className="partner-header">
                     <div className="partner-logo">
@@ -51,7 +52,7 @@ const Partners = () => {
                     <h3>{partner.name}</h3>
                     <p>{partner.desc}</p>
                     <div className="partner-specialties">
-                      {partner.specialties.map((specialty, idx) => (
+                      {partner.specialties?.map((specialty, idx) => (
                         <span key={idx} className="specialty">{specialty}</span>
                       ))}
                     </div>

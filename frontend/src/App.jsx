@@ -14,6 +14,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import News from './pages/News';
 import Careers from './pages/Careers';
+import Admin from './pages/Admin';
 
 function App() {
   return (
@@ -28,9 +29,10 @@ function App() {
           <Route path='/contact' element={<Contact />} />
           <Route path='/projects' element={<Projects />} />
           <Route path='/partners' element={<Partners />} />
-          <Route path='/news' element={<News />}></Route>
+          <Route path='/news' element={<News />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
+          <Route path='/admin' element={<Admin />} />
         </Routes>
         <Footer />
         <FloatingButton />
