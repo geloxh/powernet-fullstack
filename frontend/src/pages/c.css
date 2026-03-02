@@ -356,7 +356,7 @@ img {
 
 .partners-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
     gap: clamp(20px, 3vw, 30px);
     max-width: min(90%, 1200px);
     margin: 0 auto;
@@ -647,7 +647,7 @@ img {
 
 .solutions-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
     gap: clamp(20px, 4vw, 40px);
     padding: clamp(10px, 2vw, 20px);
     max-width: min(90%, 1200px);

@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
@@ -6,10 +8,8 @@ const jwt = require('jsonwebtoken');
 const News = require('./models/News');
 const Partner = require('./models/Partner');
 const Career = require('./models/Career');
-const Solution = require('./models/Solution');
+const Solution = require('./models/Solutions');
 const { authMiddleware, adminMiddleware } = require('./middleware/auth');
-
-require('dotenv').config();
 
 const User = require('./models/User');
 
