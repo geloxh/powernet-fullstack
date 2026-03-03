@@ -27,10 +27,10 @@ app.use(cors({
 }));
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 // Auth Routes
 app.post('/api/register', async (req, res) => {
+    console.log('Register request received:', req.body);
     try {
         const { name, email, password } = req.body;
         const existingUser = await User.findOne({ email });
@@ -42,6 +42,7 @@ app.post('/api/register', async (req, res) => {
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
         res.status(201).json({ token, user: { id: user._id, name: user.name, email: user.email, role: user.role }});
     } catch (error) {
+        console.error('Full error:', error); // Add this line
         res.status(500).json({ message: 'Registration failed', error: error.message });
     }
 });
@@ -251,11 +252,13 @@ app.post('/api/contact', (req, res) => {
     res.json({ success: true, message: "Message received" });
 });
 
-app.use((req, res) => {
-    if (!req.path.startsWith('/api')) {
+// Static files - only for production
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../frontend/dist')));
+    app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
-    }
-});
+    });
+}
 
 app.listen(PORT, () => {
     console.log(`PowerNet server running on port ${PORT}`);
