@@ -6,7 +6,7 @@ import './Admin.css';
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
 
 const Admin = () => {
-  const { user } = useContext(AuthContext);
+  const { user, loading: authLoading } = useContext(AuthContext);
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('partners');
   const [data, setData] = useState([]);
@@ -16,10 +16,11 @@ const Admin = () => {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
+    if (authLoading) return;
     if (!user || user.role !== 'admin') {
-      navigate('/login');
+      return null;
     }
-  }, [user, navigate]);
+  }, [user, authLoading, navigate]);
 
   useEffect(() => {
     fetchData();
@@ -90,6 +91,14 @@ const Admin = () => {
     setEditItem(item);
     setShowModal(true);
   };
+
+  if (authLoading) {
+    return <div className="loading">Loading...</div>
+  }
+
+  if (!user || user.role !== 'admin') {
+    return null;
+  }
 
   return (
     <div className="admin-dashboard">
