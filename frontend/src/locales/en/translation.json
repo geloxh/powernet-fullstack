@@ -6,6 +6,21 @@
         "contact": "Contact us",
         "projects": "Use Cases"
     },
+    "header": {
+        "partners": "Partners",
+        "contact": "Contact",
+        "login": "Log in",
+        "logout": "Log out",
+        "home": "Home",
+        "careers": "Careers",
+        "solutions": "Solutions",
+        "news": "News",
+        "about": "About Us",
+        "search": "Search",
+        "searchLabel": "Search site",
+        "toggleMenu": "ToggleMenu",
+        "mainNav": "Main navigation"
+    },
     "common": {
         "powernet": "PowerNet",
         "loading": "Loading...",
