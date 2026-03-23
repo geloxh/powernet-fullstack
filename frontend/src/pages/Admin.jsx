@@ -37,9 +37,9 @@ const Admin = () => {
       const result = await res.json();
       
       if (activeTab === 'users') {
-        setUsers(result);
+        setUsers(Array.isArray(result) ? result : []);
       } else {
-        setData(result);
+        setData(Array.isArray(result) ? result : []);
       }
     } catch (error) {
       console.error('Error fetching data:', error);
