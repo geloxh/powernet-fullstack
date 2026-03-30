@@ -1,10 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo} from 'react';
 import { useTranslation } from 'react-i18next';
 import './News.css'
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000'; 
 
 const News = () => {
     const [news, setNews] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [filter, setFilter] = useState('All');
     const { t } = useTranslation();
 
@@ -14,18 +17,22 @@ const News = () => {
 
     const fetchNews = async () => {
         try {
-            const response = await fetch('http://localhost:4000/api/news');
+            const response = await fetch(`${API_URL}/api/news`);
+            if (!response.ok) throw new Error('Failed to fetch news');
             const data = await response.json();
             setNews(data);
-        } catch (error) {
-            console.error('Error fetching news:', error);
+        } catch (err) {
+            console.error('Error fetching news:', err);
+            setError(err.message);
         } finally {
             setLoading(false);
         }
     };
 
-    const categories = ['All', ...new Set(news.map(item => item.category))];
-    const filteredNews = filter === 'All' ? news : news.filter(item => item.category === filter);
+    const categories = useMemo(() => ['All', ...new Set(news.map(item => item.category))], [news]);
+    const filteredNews = useMemo(() =>
+        filter === 'All' ? news : news.filter(item => item.category === filter),
+        [news, filter]);
 
     return (
         <main className="news-page">
@@ -50,12 +57,14 @@ const News = () => {
 
                 {loading ? (
                     <div className="loading">{t('news.loading', 'Loading news...')}</div>
+                ): error ? (
+                    <div className="error-message">{t('news.error', 'Failed to load news: ')}{error}</div>  
                 ) : filteredNews.length === 0 ? (
                     <div className="no-news">{t('news.noNews', 'No news available at the moment.')}</div>
                 ) : (
                     <div className="news-grid">
                         {filteredNews.map(item => {
-                            <article key={item.id} className="news-card">
+                            <article key={item._id} className="news-card">
                                 {item.image && (
                                     <div className="news-image">
                                         <img src={item.image} alt={item.title} />
