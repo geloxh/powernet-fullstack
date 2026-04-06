@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import FloatingButton from './components/FloatingButton';
 import CookieBanner from './components/CookieBanner';
+import ProtectedRoute from './components/ProtectedRoute';
 import Home from './pages/Home';
 import About from './pages/About';
 import Solutions from './pages/Solutions';
@@ -32,7 +33,7 @@ function App() {
           <Route path='/news' element={<News />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
-          <Route path='/admin' element={<Admin />} />
+          <Route path='/admin' element={<ProtectedRoute adminOnly><Admin /></ProtectedRoute>} />
         </Routes>
         <Footer />
         <FloatingButton />
