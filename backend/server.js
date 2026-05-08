@@ -1,5 +1,4 @@
 require('dotenv').config();
-
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
@@ -10,7 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/powernet')
-    .then(() => console.log('MongoDB Connected.'))
+    .then(() => console.log('MongoDB Connected'))
     .catch(err => console.error('MongoDB connection error:', err));
 
 app.use(helmet());
@@ -30,13 +29,13 @@ app.use('/api/admin', require('./routes/admin'));
 
 app.post('/api/contact', (req, res) => {
     // TODO: integrate Nodemailer or SendGrid
-    res.json({ success: true, message: 'Message received.' });
+    res.json({ success: true, message: 'Message received' });
 });
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../frontend/dist')));
-    app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../frontend/dist/index.html' )));
+    app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../frontend/dist/index.html')));
 }
 
-app.listen(PORT, () => console.log('PowerNet server running on port ${PORT} '));
+app.listen(PORT, () => console.log(`PowerNet server running on port ${PORT}`));
 module.exports = app;

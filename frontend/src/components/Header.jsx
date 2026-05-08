@@ -1,7 +1,9 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
+import { useAuth } from '../hooks/useAuth';
+
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { AuthContext } from '../context/AuthContext';
+
 import LanguageSwitcher from './LanguageSwitcher';
 
 import './Header.css';

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './d.css';
+import './Contact.css';
 
 const Contact = () => {
   const [showModal, setShowModal] = useState(false);

@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+
+import { useNavigate, Link } from 'react-router-dom';
+
 import './auth.css';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost: 4000';
@@ -17,7 +19,8 @@ function Login() {
         setError('');
 
         try {
-            const res = await fetch('http://localhost:4000/api/login', {
+            const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:4000';
+            const res = await fetch(`${API_URL}/api/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })
