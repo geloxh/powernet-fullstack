@@ -14,7 +14,7 @@ const Header = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { t } = useTranslation();
-    const { user, logout } = useContext(AuthContext);
+    const { user, logout } = useAuth();
 
     const handleSearch = (e) => {
         e.preventDefault();
